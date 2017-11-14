@@ -131,6 +131,13 @@ cscope.out
 cscope.in.out
 cscope.po.out
 
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history
 
 ### Vim ###
 # swap
