@@ -26,7 +26,7 @@ def caesar(msg, shift: int):
     Traceback (most recent call last):
         ...
     ValueError: Input contains non-alphabetic characters
-    >>> caesar('pvupgsbohf', -1251)
+    >>> caesar('pvupgsbohf', -1247)
     'outofrange'
     """
 
@@ -45,7 +45,7 @@ def caesar(msg, shift: int):
         shift %= len(A2Z)
 
     if shift < -len(A2Z):
-        shift = len(A2Z) - shift % len(A2Z)
+        shift = len(A2Z) - shift % (len(A2Z))
 
     # Adapted from https://stackoverflow.com/a/8895517
     shifted_a2z = A2Z[shift:] + A2Z[:shift]
