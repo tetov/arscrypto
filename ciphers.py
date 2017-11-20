@@ -1,6 +1,10 @@
-""" Collection of cipher decrypting functions. """
+"""
+Collection of cipher decrypting functions.
 
+    TODO: Add more alphabet's.
+"""
 import string
+import re
 
 A2Z = string.ascii_lowercase
 
@@ -9,28 +13,25 @@ def caesar(msg, shift: int):
     Decrypt string using the Caesar cipher
 
     Args:
-        encrypted_msg -- String to decrypt.
+        msg -- String to decrypt.
         shift -- Amount to shift alphabet by.
 
-    TODO: Add more alphabet's.
-
-    >>> caesar('bzdrzq', 1)
-    'caesar'
-    >>> caesar('wcjbyl', -20)
-    'cipher'
-    >>> caesar('åäö', 5)
-    Traceback (most recent call last):
-        ...
-    ValueError: Input contains letters not part of selected alphabet
-    >>> caesar('~non-alpha!', 5)
-    Traceback (most recent call last):
-        ...
-    ValueError: Input contains non-alphabetic characters
-    >>> caesar('pvupgsbohf', -1247)
-    'outofrange'
+    Tests:
+        >>> caesar('bzdrzq', 1)
+        'caesar'
+        >>> caesar('wcjbyl', -20)
+        'cipher'
+        >>> caesar('åäö', 5)
+        Traceback (most recent call last):
+            ...
+        ValueError: Input contains letters not part of selected alphabet
+        >>> caesar('~non-alpha!', 5)
+        Traceback (most recent call last):
+            ...
+        ValueError: Input contains non-alphabetic characters
+        >>> caesar('pvupgsbohf', -1247)
+        'outofrange'
     """
-
-    import re
 
     msg = msg.lower()
 
@@ -56,7 +57,38 @@ def caesar(msg, shift: int):
 def atbash(msg):
     """
     Decrypts ATBASH encrypted text.
+
+    Args:
+        msg -- String encrypt or decrypt.
+
+    Tests:
+        >>> atbash('zgyzhs')
+        atbash
+        >>> atbash('XZKGRZOH')
+        capitals
+        >>> atbash('åäö')
+        Traceback (most recent call last):
+            ...
+        ValueError: Input contains letters not part of selected alphabet
+        >>> atbash('~non-alpha!')
+        Traceback (most recent call last):
+            ...
+        ValueError: Input contains non-alphabetic characters
     """
+
+    msg = msg.lower()
+
+    if msg.isalpha() is False:
+        raise ValueError("Input contains non-alphabetic characters")
+
+    if re.findall(r'[^.a-z]', msg):
+        raise ValueError("Input contains letters not part of selected alphabet")
+
+    # Reverse string solution from https://stackoverflow.com/a/27843760
+    reversed_a2z = A2Z[::-1]
+    table = str.maketrans(A2Z, reversed_a2z)
+
+    return msg.translate(table)
 
 def vinegere(msg, key, direction):
     """
