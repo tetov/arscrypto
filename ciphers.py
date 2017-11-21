@@ -4,6 +4,7 @@ Collection of cipher decrypting functions.
     TODO: Add more alphabet's.
     TODO: Support upper case.
 """
+
 import string
 import re
 
@@ -20,13 +21,9 @@ def caesar(msg, shift: int, alphabet=A2Z):
     Tests:
         >>> caesar('bzdrzq', 1)
         'caesar'
-        >>> caesar('wcjbyl', -20)
+        >>> caesar('wCjbyl', -20)
         'cipher'
-        >>> caesar('~non-alpha!', 5)
-        Traceback (most recent call last):
-            ...
-        ValueError: Input contains non-alphabetic characters
-        >>> caesar('pvupgsbohf', -1247)
+        >>> caesar('pvuPgsbohf', -1247)
         'outofrange'
     """
 
@@ -67,7 +64,7 @@ def atbash(msg, alphabet=A2Z):
 
     return msg.translate(table)
 
-def vinegere(msg, key, direction=1, alphabet=A2Z):
+def vigenere(msg, key, direction=1, alphabet=A2Z):
     """
     Encrypts or decrypts the Vigenère cipher.
 
@@ -94,7 +91,7 @@ def vinegere(msg, key, direction=1, alphabet=A2Z):
     for i, j in zip(msg, cycle(key)):
         index = alphabet.index(i) + alphabet.index(j)
         print(alphabet[index % len(alphabet)])
-    
+
 
 
 def letter_from_number(number: int, alphabet=A2Z):
